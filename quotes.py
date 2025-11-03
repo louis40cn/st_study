@@ -1,0 +1,15 @@
+import requests
+
+API_URL = "https://api.api-ninjas.com/v2/randomquotes"
+QUOTE_CATEGORY = "inspirational"
+
+def generate_quote(api_key):
+    params = {"category": QUOTE_CATEGORY}
+    headers = {"X-Api-Key": api_key}
+    response = requests.get(API_URL, headers=headers, params=params)
+    quote_obj = response.json()[0]
+    if response.status_code == requests.codes.ok:
+        return f"{quote_obj['quote']} -- {quote_obj['author']}"
+    return "Just do it! -- Shia LaBeouf"
+
+print(generate_quote("NGVRXdkwXYp+aZmUCNckvA==OntQYAZLLMiwKyFL"))
